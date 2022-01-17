@@ -28,40 +28,42 @@ class _IslandsPage extends State<IslandsPage> {
     print(matrix);
     return Scaffold(
         body: Container(
-          padding: const EdgeInsets.all(16),
-            child: Column(
-      children: [
-        Container(
-            padding: const EdgeInsets.all(4),
-            child: Row(children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ])),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            margin: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 2.0)),
-            child: GridView.builder(
-              padding: EdgeInsets.zero,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: matrix.length,
-              ),
-              itemBuilder: _buildGridItems,
-              itemCount: matrix.length * matrix.length,
-            ),
-          ),
-        ),
-        SizedBox(height: 50),
-        Text("Número de Islas: " + _nIslands(matrix), style: TextStyle(fontWeight: FontWeight.bold,fontSize:20))
-      ],
-    )));
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+                child: Column(
+              children: [
+                Container(
+                    padding: const EdgeInsets.all(4),
+                    child: Row(children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      )
+                    ])),
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2.0)),
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: matrix.length,
+                      ),
+                      itemBuilder: _buildGridItems,
+                      itemCount: matrix.length * matrix.length,
+                      shrinkWrap: true,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50),
+                Text("Número de Islas: " + _nIslands(matrix),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              ],
+            ))));
   }
 
   String _nIslands(List<List<num>> matrix) {
@@ -124,9 +126,9 @@ class _IslandsPage extends State<IslandsPage> {
   Widget _itemBuild(int x, int y) {
     switch (matrix[x][y]) {
       case 1:
-        return Icon(Icons.terrain,color: Colors.brown);
+        return Icon(Icons.terrain, color: Colors.brown);
       case 0:
-        return Icon(Icons.water,color: Colors.blue);
+        return Icon(Icons.water, color: Colors.blue);
       default:
         return Text(matrix[x][y].toString());
     }

@@ -46,7 +46,7 @@ class IniMatrix extends StatelessWidget {
                       onPressed: () {
                         var mSize = sizeController.text;
                         print(mSize);
-                        if (mSize.isEmpty) mSize = "4";
+                        if (mSize.isEmpty || int.parse(mSize)<=0) mSize = "4";
                         Navigator.push(
                             context,
                             MaterialPageRoute(
